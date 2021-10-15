@@ -4,6 +4,9 @@ from numbers import Number
 from geojson.base import GeoJSON
 
 
+DEFAULT_PRECISION = 6
+
+
 class Geometry(GeoJSON):
     """
     Represents an abstract base class for a WGS84 geometry.
@@ -21,6 +24,8 @@ class Geometry(GeoJSON):
         :type precision: integer
         """
         super().__init__(**extra)
+        if precision is None:
+            precision = DEFAULT_PRECISION
         self["coordinates"] = self.clean_coordinates(
             coordinates or [], precision)
 
